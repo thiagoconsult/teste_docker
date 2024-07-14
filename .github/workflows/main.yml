@@ -15,9 +15,18 @@ jobs:
 
     steps:
       - name: Checkout Repository
-      uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Build and Push Docker Image
-      run: |
-        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        docker build -t $DOCKER_USERNAME/teste_docker:latest
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker build --no-cache -t $DOCKER_USERNAME/teste_docker:latest \
+          --build-arg NODE_ENV={{ secrets.NODE_ENV }} \
+          --build-arg PORT ={{ secrets.PORT }} \
+          --build-arg= POSTGRES_HOST \
+          --build-arg= POSTGRES_PORT \
+          --build-arg= POSTGRES_USER \
+          --build-arg= POSTGRES_PASSWORD \
+          --build-arg= POSTGRES_DB \
+          --build-arg= JWT_SECRET . \
+          docker push $DOCKER_USERNAME/teste_docker:latest
