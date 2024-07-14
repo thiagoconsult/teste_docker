@@ -21,12 +21,12 @@ jobs:
         run: |
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker build --no-cache -t $DOCKER_USERNAME/teste_docker:latest \
-          --build-arg NODE_ENV={{ secrets.NODE_ENV }} \
-          --build-arg PORT={{ secrets.PORT }} \
-          --build-arg POSTGRES_HOST={{ secrets.POSTGRES_HOST }} \
-          --build-arg POSTGRES_PORT={{ secrets.POSTGRES_PORT}} \
-          --build-arg POSTGRES_USER={{ secrets.POSTGRES_USER }} \
-          --build-arg POSTGRES_PASSWORD={{ secrets.POSTGRES_PASSWORD }} \
-          --build-arg POSTGRES_DB={{ secrets.POSTGRES_DB }}\
-          --build-arg JWT_SECRET={{ secrets.JWT_SECRET }} . \
+          --build-arg NODE_ENV = ${{ secrets.NODE_ENV }} \
+          --build-arg PORT = ${{ secrets.PORT }} \
+          --build-arg POSTGRES_HOST = ${{ secrets.POSTGRES_HOST }} \
+          --build-arg POSTGRES_PORT = ${{ secrets.POSTGRES_PORT}} \
+          --build-arg POSTGRES_USER = ${{ secrets.POSTGRES_USER }} \
+          --build-arg POSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }} \
+          --build-arg POSTGRES_DB = ${{ secrets.POSTGRES_DB }}\
+          --build-arg JWT_SECRET = ${{ secrets.JWT_SECRET }} . \
           docker push $DOCKER_USERNAME/teste_docker:latest
