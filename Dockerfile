@@ -37,6 +37,6 @@ RUN echo "JWT_SECRET=${JWT_SECRET}" > .env
 
 RUN npm run build
 
-EXPOSE 3001
+EXPOSE 3000
 
 CMD ["node", "build/server"]
